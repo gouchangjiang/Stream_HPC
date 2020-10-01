@@ -17,25 +17,23 @@ PEDANTIC_PARANOID_FREAK =       -O0 -Wshadow -Wcast-align \
 REASONABLY_CAREFUL_DUDE =	-Wall
 NO_PRAYER_FOR_THE_WICKED =	-w -O2 
 WARNINGS = $(REASONABLY_CAREFUL_DUDE)
-CFLAGS = $(WARNINGS) -m64 -g -DNOASSERT -std=c++11
+CFLAGS = $(WARNINGS) -m64 -g -DNOASSERT -std=c++14
 #CFLAGS = $(PEDANTIC_PARANOID_FREAK) -std=c++11 -g
 INCLUDES = -I${INC_PATH}
-DEFS = 
-LDADD =
 LIBS = ${LIB_PATH}/heuristics.a 
 
 # all source files have associated object files
 node.o: src/node.cpp include/node.hpp
-	$(CPP) $(INCLUDES) $(DEFS) $(CFLAGS) -o ${OBJ_PATH}/$@ -c $< -fPIC
+	$(CPP) $(INCLUDES) $(CFLAGS) -o ${OBJ_PATH}/$@ -c $< -fPIC
 
 graph.o: src/graph.cpp include/graph.hpp
-	$(CPP) $(INCLUDES) $(DEFS) $(CFLAGS) -o ${OBJ_PATH}/$@ -c $< -fPIC
+	$(CPP) $(INCLUDES) $(CFLAGS) -o ${OBJ_PATH}/$@ -c $< -fPIC
 
 utils.o: src/utils.cpp include/utils.hpp
-	$(CPP) $(INCLUDES) $(DEFS) $(CFLAGS) -o ${OBJ_PATH}/$@ -c $< -fPIC
+	$(CPP) $(INCLUDES) $(CFLAGS) -o ${OBJ_PATH}/$@ -c $< -fPIC
 
 heuristics.o: src/algorithms.cpp include/algorithms.hpp include/common.hpp graph.o utils.o node.o
-	$(CPP) $(INCLUDES) $(DEFS) $(CFLAGS) -o ${OBJ_PATH}/$@ -c $< -fPIC
+	$(CPP) $(INCLUDES) $(CFLAGS) -o ${OBJ_PATH}/$@ -c $< -fPIC
 
 heuristics:heuristics.o 
 	rm -f ${LIB_PATH}/$@.a ${LIB_PATH}/$@.so
